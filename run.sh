@@ -3,10 +3,8 @@
 docker stop ibbd-php 
 docker rm ibbd-php 
 
-docker run --name ibbd-php -d -p 80:80 \
-    -v /usr/local/php/conf/vhost:/etc/php/sites-enabled \
-    -v /var/log/php:/var/log/php \
-    -v /home/code/ibbd:/var/www/html \
+docker run -ti --rm --name ibbd-php  \
+    -p 9000:9000 \
     ibbd/php
 
 docker ps -a
