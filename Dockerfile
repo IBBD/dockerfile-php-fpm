@@ -8,8 +8,8 @@
 #
 
 # Pull base image.
-FROM php:5.6
-#FROM php:5.6-fpm
+#FROM php:5.6
+FROM php:5.6-fpm
 
 # Install modules
 RUN apt-get update && apt-get install -y \
