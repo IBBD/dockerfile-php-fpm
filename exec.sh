@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker exec -ti ibbd-php /bin/bash
+docker exec -ti --rm ibbd-php /bin/bash
 
