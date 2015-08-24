@@ -14,7 +14,7 @@ FROM php:5.6-fpm
 # Install modules
 RUN apt-get update && apt-get install -y \
         libmcrypt-dev \
-    && docker-php-ext-install iconv mcrypt pdo tokenizer
+    && docker-php-ext-install iconv mcrypt pdo tokenizer mbstring
 
 CMD ["php-fpm"]
 
