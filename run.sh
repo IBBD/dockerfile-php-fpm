@@ -11,3 +11,4 @@ docker run --name=ibbd-php -d \
     -v /home/code/ibbd:/var/www \
     ibbd/php
 
+docker ps
