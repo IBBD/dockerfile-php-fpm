@@ -1,5 +1,5 @@
 #!/bin/bash
 
-docker start ibbd-php 
+docker start ibbd-php-fpm 
 docker ps
 

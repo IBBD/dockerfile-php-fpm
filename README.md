@@ -1,2 +1,2 @@
-# dockerfile-php
-PHP Docker
+# dockerfile-php-fpm
+PHP FPM Dockerfile

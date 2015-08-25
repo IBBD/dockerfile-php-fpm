@@ -2,7 +2,7 @@
 # PHP Dockerfile
 # 满足laravel5.1版本的基本要求
 #
-# https://github.com/ibbd/dockerfile-php
+# https://github.com/ibbd/dockerfile-php-fpm
 #
 # sudo docker build -t ibbd/php ./
 #

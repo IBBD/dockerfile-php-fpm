@@ -3,12 +3,12 @@
 # 
 
 
-docker stop ibbd-php 
-docker rm ibbd-php 
+docker stop ibbd-php-fpm 
+docker rm ibbd-php-fpm 
 
-docker run --name=ibbd-php -d \
+docker run --name=ibbd-php-fpm -d \
     -p 9000:9000 \
     -v /home/code/ibbd:/var/www \
-    ibbd/php
+    ibbd/php-fpm
 
 docker ps
