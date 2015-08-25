@@ -4,6 +4,7 @@
 #
 # https://github.com/ibbd/dockerfile-php-fpm
 #
+# 下载相关资源：./download.sh
 # sudo docker build -t ibbd/php ./
 #
 
@@ -21,6 +22,7 @@ RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng12-dev \
+        libssl-dev \
     && rm -r /var/lib/apt/lists/*
 
 # install php modules
@@ -28,20 +30,27 @@ RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-d
     && docker-php-ext-install gd \
     && docker-php-ext-install iconv mcrypt pdo tokenizer mbstring
 
-# pecl install php modules
-RUN  mkdir /home/php
-COPY ext/redis.tgz /home/php/redis.tgz 
-COPY ext/mongo.tgz /home/php/mongo.tgz 
-COPY ext/msgpack.tgz /home/php/msgpack.tgz 
-
-RUN pecl install /home/php/redis.tgz && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
-    && pecl install /home/php/msgpack.tgz && echo "extension=msgpack.so" > /usr/local/etc/php/conf.d/msgpack.ini \
-    && pecl install /home/php/mongo.tgz && echo "extension=mongo.so" > /usr/local/etc/php/conf.d/mongo.ini \
-    && rm -rf /home/php
-
 # PHP config
 ADD conf/php.ini        /usr/local/etc/php/php.ini
 ADD conf/php-fpm.conf   /usr/local/etc/php-fpm.conf
+
+# pecl install php modules
+RUN  mkdir /home/php
+COPY ext/redis.tgz    /home/php/redis.tgz 
+COPY ext/mongo.tgz    /home/php/mongo.tgz 
+COPY ext/msgpack.tgz  /home/php/msgpack.tgz 
+
+# 安装mongo扩展时，出现如下错误：
+# Unable to load dynamic library '/usr/local/lib/php/extensions/no-debug-non-zts-20131226/mongo.so'
+# 需要先安装libssl-dev
+RUN cd /home/php \
+    && pecl install redis.tgz \
+    && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
+    && pecl install msgpack.tgz \
+    && echo "extension=msgpack.so" > /usr/local/etc/php/conf.d/msgpack.ini \
+    && pecl install mongo.tgz \
+    && echo "extension=mongo.so" > /usr/local/etc/php/conf.d/mongo.ini \
+    && rm -rf /home/php
 
 # composer 
 #RUN curl -sS https://getcomposer.org/installer | php \
