@@ -50,6 +50,8 @@ RUN cd /home/php \
     && echo "extension=msgpack.so" > /usr/local/etc/php/conf.d/msgpack.ini \
     && pecl install mongo.tgz \
     && echo "extension=mongo.so" > /usr/local/etc/php/conf.d/mongo.ini \
+    #&& pecl install swoole \
+    #&& echo "extension=swoole.so" > /usr/local/etc/php/conf.d/swoole.ini \
     && rm -rf /home/php
 
 # composer 
