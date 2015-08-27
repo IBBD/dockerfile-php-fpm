@@ -64,7 +64,7 @@ RUN cd /home/php \
 WORKDIR /var/www 
 
 # Define mountable directories.
-VOLUME ["/var/log/php", "/var/www"]
+VOLUME /var/www
 
 EXPOSE 9000
 #CMD ["php-fpm"]
