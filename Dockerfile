@@ -63,6 +63,9 @@ RUN cd /home/php \
 
 WORKDIR /var/www 
 
+# 解决时区问题
+env TZ "Asia/Shanghai"
+
 # Define mountable directories.
 VOLUME /var/www
 
