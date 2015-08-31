@@ -1,1 +1,4 @@
 /ext
+/conf/php.ini
+/conf/php-fpm.conf
+
