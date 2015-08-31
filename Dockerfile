@@ -55,11 +55,11 @@ RUN cd /home/php \
     && rm -rf /home/php
 
 # composer 
-#RUN curl -sS https://getcomposer.org/installer | php \
-    #&& mv composer.phar /usr/local/bin/composer \
-    #&& chmod 755 /usr/local/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer \
+    && chmod 755 /usr/local/bin/composer
 # composer中国镜像
-#RUN composer config -g repositories.packagist composer http://packagist.phpcomposer.com
+RUN composer config -g repositories.packagist composer http://packagist.phpcomposer.com
 
 WORKDIR /var/www 
 
