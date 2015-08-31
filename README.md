@@ -17,6 +17,7 @@ PHP FPM Dockerfile
 - mongo
 - msgpack 
 - swoole 
+- zip
 
 ## 附加安装
 
