@@ -14,10 +14,12 @@ FROM php:5.6-fpm
 
 # sources.list
 # git clone git@github.com:IBBD/docker-compose.git
+# 如果导致apt-get Install不成功，可以先注释这句
 ADD ext/sources.list   /etc/apt/sources.list
 
 # Install modules
-RUN apt-get update && apt-get install -y \
+RUN apt-get update 
+RUN apt-get install -y \
         libmcrypt-dev \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
@@ -52,17 +54,18 @@ RUN cd /home/php \
     && pecl install mongo.tgz \
     && echo "extension=mongo.so" > /usr/local/etc/php/conf.d/mongo.ini \
     && pecl install swoole \
-    && echo "extension=swoole.so" > /usr/local/etc/php/conf.d/swoole.ini \
-    && rm -rf /home/php
+    && echo "extension=swoole.so" > /usr/local/etc/php/conf.d/swoole.ini 
 
 # composer 
-RUN curl -sS https://getcomposer.org/installer | php \
+COPY ext/composer.php /home/php/composer.php
+RUN php composer.php \
     && mv composer.phar /usr/local/bin/composer \
     && chmod 755 /usr/local/bin/composer
 # composer中国镜像
 RUN composer config -g repositories.packagist composer http://packagist.phpcomposer.com
 
 WORKDIR /var/www 
+RUN rm -rf /home/php
 
 # 解决时区问题
 env TZ "Asia/Shanghai"

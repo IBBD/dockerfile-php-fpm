@@ -26,4 +26,9 @@ wget http://pecl.php.net/get/mongo -O mongo.tgz
 rm msgpack.tgz
 wget http://pecl.php.net/get/msgpack -O msgpack.tgz
 
+# composer
+echo 'begin get composer.php...'
+curl -sS https://getcomposer.org/installer -o composer.php
+echo 'end of composer.php'
+
 echo "===> Finish!"
