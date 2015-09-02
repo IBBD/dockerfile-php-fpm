@@ -1,6 +1,8 @@
 #!/bin/bash
 # 需要重启nginx
 # 
+# /usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf
+# 
 
 
 docker stop ibbd-php-fpm 
