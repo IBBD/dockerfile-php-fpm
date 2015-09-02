@@ -32,3 +32,4 @@ curl -sS https://getcomposer.org/installer -o composer.php
 echo 'end of composer.php'
 
 echo "===> Finish!"
+
