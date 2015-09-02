@@ -58,7 +58,7 @@ RUN cd /home/php \
 
 # composer 
 COPY ext/composer.php /home/php/composer.php
-RUN php composer.php \
+RUN php /home/php/composer.php \
     && mv composer.phar /usr/local/bin/composer \
     && chmod 755 /usr/local/bin/composer
 # composer中国镜像
