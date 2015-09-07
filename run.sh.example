@@ -2,6 +2,20 @@
 # 需要重启nginx
 # 
 
+#----------------------------------------
+#------- 配置信息 BEGIN -----------------
+#----------------------------------------
+
+# 代码目录
+code_path=/var/www
+
+# 日志目录
+logs_path=/var/log/php
+
+#----------------------------------------
+#------- 配置信息 END -------------------
+#----------------------------------------
+
 current_path=$(pwd)
 if [ ! -f $current_path/conf/php.ini ]
 then
@@ -14,8 +28,8 @@ docker rm ibbd-php-fpm
 
 docker run --name=ibbd-php-fpm -d \
     -p 9000:9000 \
-    -v /home/code/ibbd:/var/www \
-    -v /var/log/php:/var/log/php \
+    -v $code_path:/var/www \
+    -v $logs_path:/var/log/php \
     -v $current_path/conf/php.ini:/usr/local/etc/php/php.ini:ro \
     -v $current_path/conf/php-fpm.conf:/usr/local/etc/php-fpm.conf:ro \
     ibbd/php-fpm \
