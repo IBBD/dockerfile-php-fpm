@@ -34,8 +34,8 @@ RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-d
     && docker-php-ext-install iconv mcrypt pdo tokenizer mbstring zip
 
 # PHP config
-ADD conf/php.ini        /usr/local/etc/php/php.ini
-ADD conf/php-fpm.conf   /usr/local/etc/php-fpm.conf
+#ADD conf/php.ini        /usr/local/etc/php/php.ini
+#ADD conf/php-fpm.conf   /usr/local/etc/php-fpm.conf
 
 # pecl install php modules
 RUN  mkdir /home/php
