@@ -9,7 +9,7 @@
 [ ! -f conf/php-fpm.conf ]  && cp conf/php-fpm.conf.example conf/php-fpm.conf 
 
 # 下载相关文件
-source ./download.sh 
+#source ./download.sh 
 
 echo '==> php-fpm init ok'
 

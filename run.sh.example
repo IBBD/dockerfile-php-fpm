@@ -2,6 +2,12 @@
 # 需要重启nginx
 # 
 
+current_path=$(pwd)
+if [ ! -f $current_path/conf/php.ini ]
+then
+    echo "ERROR: $current_path is error."
+    exit 1
+fi
 
 docker stop ibbd-php-fpm 
 docker rm ibbd-php-fpm 
@@ -10,8 +16,8 @@ docker run --name=ibbd-php-fpm -d \
     -p 9000:9000 \
     -v /home/code/ibbd:/var/www \
     -v /var/log/php:/var/log/php \
-    -v /home/code/ibbd/dockerfile/php-fpm/conf/php.ini:/usr/local/etc/php/php.ini:ro \
-    -v /home/code/ibbd/dockerfile/php-fpm/conf/php-fpm.conf:/usr/local/etc/php-fpm.conf:ro \
+    -v $current_path/conf/php.ini:/usr/local/etc/php/php.ini:ro \
+    -v $current_path/conf/php-fpm.conf:/usr/local/etc/php-fpm.conf:ro \
     ibbd/php-fpm \
     php-fpm -c /usr/local/etc/php/php.ini -y /usr/local/etc/php-fpm.conf
 
