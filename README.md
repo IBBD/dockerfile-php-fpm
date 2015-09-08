@@ -25,6 +25,11 @@
 
 - php composer
 
+## 安装 
+
+- Dockerfile: `sudo ./build.sh`
+- Pull: `sudo docker pull ibbd/php-fpm`
+
 ## 使用
 
 ```sh
