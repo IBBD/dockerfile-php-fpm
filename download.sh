@@ -26,6 +26,11 @@ wget http://pecl.php.net/get/mongo -O mongo.tgz
 rm msgpack.tgz
 wget http://pecl.php.net/get/msgpack -O msgpack.tgz
 
+# memcache
+# 缓存虽然我们用redis，不过有些地方可能需要memcache扩展
+rm memcache.tgz
+wget http://pecl.php.net/get/memcache -O memcache.tgz
+
 # composer
 echo 'begin get composer.php...'
 curl -sS https://getcomposer.org/installer -o composer.php

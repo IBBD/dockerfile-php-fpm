@@ -42,6 +42,7 @@ RUN  mkdir /home/php
 COPY ext/redis.tgz    /home/php/redis.tgz 
 COPY ext/mongo.tgz    /home/php/mongo.tgz 
 COPY ext/msgpack.tgz  /home/php/msgpack.tgz 
+COPY ext/memcache.tgz /home/php/memcache.tgz 
 
 # 安装mongo扩展时，出现如下错误：
 # Unable to load dynamic library '/usr/local/lib/php/extensions/no-debug-non-zts-20131226/mongo.so'
@@ -49,6 +50,8 @@ COPY ext/msgpack.tgz  /home/php/msgpack.tgz
 RUN cd /home/php \
     && pecl install redis.tgz \
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
+    && pecl install memcache.tgz \
+    && echo "extension=memcache.so" > /usr/local/etc/php/conf.d/memcache.ini \
     && pecl install msgpack.tgz \
     && echo "extension=msgpack.so" > /usr/local/etc/php/conf.d/msgpack.ini \
     && pecl install mongo.tgz \
