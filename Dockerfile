@@ -12,6 +12,8 @@
 #FROM php:5.6
 FROM php:5.6-fpm
 
+MAINTAINER Alex Cai "cyy0523xc@gmail.com"
+
 # sources.list
 # git clone git@github.com:IBBD/docker-compose.git
 # 如果导致apt-get Install不成功，可以先注释这句
@@ -31,7 +33,7 @@ RUN apt-get install -y \
 # composer需要先安装zip
 RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
-    && docker-php-ext-install iconv mcrypt pdo tokenizer mbstring zip
+    && docker-php-ext-install iconv mcrypt pdo pdo_mysql tokenizer mbstring zip
 
 # PHP config
 #ADD conf/php.ini        /usr/local/etc/php/php.ini
@@ -39,22 +41,23 @@ RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-d
 
 # pecl install php modules
 RUN  mkdir /home/php
-COPY ext/redis.tgz    /home/php/redis.tgz 
-COPY ext/mongo.tgz    /home/php/mongo.tgz 
-COPY ext/msgpack.tgz  /home/php/msgpack.tgz 
-COPY ext/memcache.tgz /home/php/memcache.tgz 
+#COPY ext/redis.tgz    /home/php/redis.tgz 
+#COPY ext/mongo.tgz    /home/php/mongo.tgz 
+#COPY ext/msgpack.tgz  /home/php/msgpack.tgz 
+#COPY ext/memcache.tgz /home/php/memcache.tgz 
 
 # 安装mongo扩展时，出现如下错误：
 # Unable to load dynamic library '/usr/local/lib/php/extensions/no-debug-non-zts-20131226/mongo.so'
 # 需要先安装libssl-dev
+# 如果本地构建的话，建议先下载好相应的扩展包
 RUN cd /home/php \
-    && pecl install redis.tgz \
+    && pecl install redis \
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
-    && pecl install memcache.tgz \
+    && pecl install memcache \
     && echo "extension=memcache.so" > /usr/local/etc/php/conf.d/memcache.ini \
-    && pecl install msgpack.tgz \
+    && pecl install msgpack \
     && echo "extension=msgpack.so" > /usr/local/etc/php/conf.d/msgpack.ini \
-    && pecl install mongo.tgz \
+    && pecl install mongo \
     && echo "extension=mongo.so" > /usr/local/etc/php/conf.d/mongo.ini \
     && pecl install swoole \
     && echo "extension=swoole.so" > /usr/local/etc/php/conf.d/swoole.ini 
