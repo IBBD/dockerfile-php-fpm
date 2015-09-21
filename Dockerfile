@@ -43,19 +43,22 @@ RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-d
 RUN  mkdir /home/php
 #COPY ext/redis.tgz    /home/php/redis.tgz 
 #COPY ext/mongo.tgz    /home/php/mongo.tgz 
-#COPY ext/msgpack.tgz  /home/php/msgpack.tgz 
+COPY ext/msgpack.tgz  /home/php/msgpack.tgz 
 #COPY ext/memcache.tgz /home/php/memcache.tgz 
 
 # 安装mongo扩展时，出现如下错误：
 # Unable to load dynamic library '/usr/local/lib/php/extensions/no-debug-non-zts-20131226/mongo.so'
 # 需要先安装libssl-dev
 # 如果本地构建的话，建议先下载好相应的扩展包
+# 直接使用pecl install msgpack会报错：
+# Failed to download pecl/msgpack within preferred state "stable", latest release is version 0.5.7, stability "beta", use "channel://pecl.php.net/msgpack-0.5.7" to install
+#
 RUN cd /home/php \
     && pecl install redis \
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
     && pecl install memcache \
     && echo "extension=memcache.so" > /usr/local/etc/php/conf.d/memcache.ini \
-    && pecl install msgpack \
+    && pecl install msgpack.tgz \
     && echo "extension=msgpack.so" > /usr/local/etc/php/conf.d/msgpack.ini \
     && pecl install mongo \
     && echo "extension=mongo.so" > /usr/local/etc/php/conf.d/mongo.ini \
