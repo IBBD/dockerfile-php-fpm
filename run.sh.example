@@ -23,10 +23,7 @@ then
     exit 1
 fi
 
-docker stop ibbd-php-fpm 
-docker rm ibbd-php-fpm 
-
-docker run --name=ibbd-php-fpm -d \
+sudo docker run --name=ibbd-php-fpm -d \
     -p 9000:9000 \
     -v $code_path:/var/www \
     -v $logs_path:/var/log/php \
@@ -35,4 +32,4 @@ docker run --name=ibbd-php-fpm -d \
     ibbd/php-fpm \
     php-fpm -c /usr/local/etc/php/php.ini -y /usr/local/etc/php-fpm.conf
 
-docker ps
+sudo docker ps
