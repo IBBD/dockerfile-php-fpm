@@ -36,5 +36,9 @@ echo 'begin get composer.php...'
 curl -sS https://getcomposer.org/installer -o composer.php
 echo 'end of composer.php'
 
+# phpunit 
+wget https://phar.phpunit.de/phpunit.phar
+chmod +x phpunit.phar
+
 echo "===> Finish!"
 
