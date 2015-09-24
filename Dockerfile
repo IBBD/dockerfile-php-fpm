@@ -63,7 +63,9 @@ RUN cd /home/php \
     && pecl install mongo \
     && echo "extension=mongo.so" > /usr/local/etc/php/conf.d/mongo.ini \
     && pecl install swoole \
-    && echo "extension=swoole.so" > /usr/local/etc/php/conf.d/swoole.ini 
+    && echo "extension=swoole.so" > /usr/local/etc/php/conf.d/swoole.ini \
+    && pecl install xdebug \
+    && echo "extension=xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini 
 
 # composer 
 # composer中国镜像

@@ -20,6 +20,8 @@
 - msgpack 
 - swoole 
 - zip
+- phpunit 
+- xdebug
 
 附加安装
 
