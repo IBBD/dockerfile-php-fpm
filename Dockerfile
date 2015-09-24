@@ -76,7 +76,7 @@ RUN php /home/php/composer.php \
     && mv composer.phar /usr/local/bin/composer \
     && chmod 755 /usr/local/bin/composer \
     && composer config -g repositories.packagist composer http://packagist.phpcomposer.com \
-    && chmod +x /hom/php/phpunit.phar \
+    && chmod +x /home/php/phpunit.phar \
     && mv /home/php/phpunit.phar /usr/local/bin/phpunit \
     && phpunit --version \
     && rm -rf /home/php \
