@@ -20,8 +20,9 @@ MAINTAINER Alex Cai "cyy0523xc@gmail.com"
 ADD ext/sources.list   /etc/apt/sources.list
 
 # Install modules
-RUN apt-get update 
-RUN apt-get install -y \
+RUN \
+    apt-get update \
+    && apt-get install -y \
         libmcrypt-dev \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
@@ -80,7 +81,6 @@ RUN php /home/php/composer.php \
     && composer config -g repositories.packagist composer http://packagist.phpcomposer.com \
     && chmod +x /home/php/phpunit.phar \
     && mv /home/php/phpunit.phar /usr/local/bin/phpunit \
-    && phpunit --version \
     && rm -rf /home/php \
 
 
