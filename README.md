@@ -2,6 +2,8 @@
 
 该镜像主要为满足 `laravel5` 框架而制作，并附加了 `redis`, `mongo`, `msgpack`, `swoole`等扩展。
 
+如果需要phpunit，xdebug，pman等测试及开发工具，请使用`ibbd/php-dev`镜像，对应的dockerfile在目录`php-dev`下。
+
 ## 基础说明
 
 - 基础镜像：php-fpm:5.6
@@ -20,8 +22,6 @@
 - msgpack 
 - swoole 
 - zip
-- phpunit 
-- xdebug
 
 附加安装
 

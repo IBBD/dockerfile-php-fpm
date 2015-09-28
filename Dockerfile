@@ -53,9 +53,6 @@ COPY ext/msgpack.tgz  /home/php/msgpack.tgz
 # 如果本地构建的话，建议先下载好相应的扩展包
 # 直接使用pecl install msgpack会报错：
 # Failed to download pecl/msgpack within preferred state "stable", latest release is version 0.5.7, stability "beta", use "channel://pecl.php.net/msgpack-0.5.7" to install
-# 使用pecl install xdebug, 会有warning：Xdebug MUST be loaded as a Zend extension in Unknown on line 0
-# xdebug 必须使用 zend_extension_ts 或者 zend_extension 来标明它是zend的扩展
-# extension意为基于php引擎的扩展，zend_extension意为基于zend引擎的扩展
 RUN cd /home/php \
     && pecl install redis \
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
@@ -66,21 +63,15 @@ RUN cd /home/php \
     && pecl install mongo \
     && echo "extension=mongo.so" > /usr/local/etc/php/conf.d/mongo.ini \
     && pecl install swoole \
-    && echo "extension=swoole.so" > /usr/local/etc/php/conf.d/swoole.ini \
-    && pecl install xdebug \
-    && echo "zend_extension=xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini 
+    && echo "extension=swoole.so" > /usr/local/etc/php/conf.d/swoole.ini 
 
 # composer 
 # composer中国镜像
-# phpunit
 COPY ext/composer.php /home/php/composer.php
-COPY ext/phpunit.phar /home/php/phpunit.phar
 RUN php /home/php/composer.php \
     && mv composer.phar /usr/local/bin/composer \
     && chmod 755 /usr/local/bin/composer \
     && composer config -g repositories.packagist composer http://packagist.phpcomposer.com \
-    && chmod +x /home/php/phpunit.phar \
-    && mv /home/php/phpunit.phar /usr/local/bin/phpunit \
     && rm -rf /home/php \
 
 

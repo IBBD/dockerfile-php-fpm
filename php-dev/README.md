@@ -5,6 +5,8 @@
 
 ## 安装列表
 
+- phpunit
+- xdebug
 - man
 - vim-tiny 
 - git-core
