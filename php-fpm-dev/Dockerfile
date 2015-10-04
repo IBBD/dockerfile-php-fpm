@@ -18,6 +18,7 @@ WORKDIR /var/www
 # 使用pecl install xdebug, 会有warning：Xdebug MUST be loaded as a Zend extension in Unknown on line 0
 # xdebug 必须使用 zend_extension_ts 或者 zend_extension 来标明它是zend的扩展
 # extension意为基于php引擎的扩展，zend_extension意为基于zend引擎的扩展
+# xdebug does not have REST dependency information
 COPY phpunit.phar /usr/local/bin/phpunit
 RUN apt-get update \
     && apt-get install -y \
@@ -30,7 +31,7 @@ RUN apt-get update \
     && git config --global push.default simple \
     && pear install doc.php.net/pman \
     && pear upgrade pear \
-    && pecl install xdebug \
+    && pecl install --force --alldeps xdebug \
     && echo "zend_extension=xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini \
     && chmod +x /usr/local/bin/phpunit \
     && rm -r /var/lib/apt/lists/*
