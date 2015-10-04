@@ -11,6 +11,7 @@
 
 ## PHP扩展 
 
+- gd
 - iconv 
 - mcrypt
 - pdo
@@ -20,7 +21,6 @@
 - redis
 - mongo
 - msgpack 
-- swoole 
 - zip
 
 附加安装

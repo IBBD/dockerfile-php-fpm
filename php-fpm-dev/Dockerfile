@@ -1,10 +1,10 @@
 #
-# PHP Dev Dockerfile
+# PHP FPM Dev Dockerfile
 # 在ibbd/php-fpm的基础上安装开发环境
 #
-# https://github.com/ibbd/dockerfile-php-fpm/php-dev
+# https://github.com/ibbd/dockerfile-fpm-php-fpm/php-dev
 #
-# sudo docker build -t ibbd/php-dev ./
+# sudo docker build -t ibbd/php-fpm-dev ./
 #
 
 # Pull base image.

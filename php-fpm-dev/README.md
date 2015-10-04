@@ -1,4 +1,4 @@
-## PHP开发环境镜像构建文档
+## PHP FPM开发环境镜像构建文档
 
 - 基础镜像：`docker pull ibbd/php-fpm`
 - 使用在本地开发环境和测试环境 

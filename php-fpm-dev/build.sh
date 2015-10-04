@@ -1,6 +1,6 @@
 #!/bin/bash
 
-name=php-dev
+name=php-fpm-dev
 
 # 清除已有的
 sudo docker stop ibbd-$name
