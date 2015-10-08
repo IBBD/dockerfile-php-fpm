@@ -41,8 +41,8 @@ RUN apt-get update \
     && pear install phpdoc/phpDocumentor \
     && pecl install --force --alldeps xdebug \
     && echo "zend_extension=xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini \
-    && pecl install strace \
-    && echo "extension=strace.so" > /usr/local/etc/php/conf.d/strace.ini \
+    && pecl install trace \
+    && echo "extension=trace.so" > /usr/local/etc/php/conf.d/trace.ini \
     && pecl install xhprof-0.9.4 \
     && echo "extension=xhprof.so" > /usr/local/etc/php/conf.d/xhprof.ini \
     && chmod +x /usr/local/bin/phpunit \
