@@ -19,23 +19,39 @@ WORKDIR /var/www
 # xdebug 必须使用 zend_extension_ts 或者 zend_extension 来标明它是zend的扩展
 # extension意为基于php引擎的扩展，zend_extension意为基于zend引擎的扩展
 # xdebug does not have REST dependency information
+# install phpDocumentor  (需要 Graphviz)
+# @see http://www.phpdoc.org/
+# @see http://www.phpdoc.org/docs/latest/index.html
 COPY phpunit.phar /usr/local/bin/phpunit
 RUN apt-get update \
     && apt-get install -y \
         man \
         git-core \
         vim-tiny \
+        Graphviz \
+        tcpdump \
+        strace \
     && echo "set fileencodings=utf-8" >> /etc/vim/vimrc \
     && echo "set fileencoding=utf-8" >> /etc/vim/vimrc \
     && echo "set encoding=utf-8" >> /etc/vim/vimrc \
     && git config --global push.default simple \
     && pear install doc.php.net/pman \
     && pear upgrade pear \
+    && pear channel-discover pear.phpdoc.org \
+    && pear install phpdoc/phpDocumentor \
     && pecl install --force --alldeps xdebug \
     && echo "zend_extension=xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini \
+    && pecl install strace \
+    && echo "extension=strace.so" > /usr/local/etc/php/conf.d/strace.ini \
+    && pecl install xhprof-0.9.4 \
+    && echo "extension=xhprof.so" > /usr/local/etc/php/conf.d/xhprof.ini \
     && chmod +x /usr/local/bin/phpunit \
     && rm -r /var/lib/apt/lists/*
 
+# install phpstrace 
+# @see https://github.com/Qihoo360/phptrace
+
+# install phpdbg
 
 # 终端设置
 # 执行php-fpm时，默认值是dumb，这时在终端操作时可能会出现：terminal is not fully functional

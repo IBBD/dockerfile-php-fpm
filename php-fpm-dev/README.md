@@ -11,5 +11,11 @@
 - vim-tiny 
 - git-core
 - pman 
+- tcpdump
+- strace 
+- Graphviz : phpDocumentor需要
+- phpDocumentor
+- phpstrace
+- xhprof 0.9.4
 
 
