@@ -15,7 +15,6 @@
 - strace 
 - Graphviz : phpDocumentor需要
 - phpDocumentor
-- phptrace
 - xhprof 0.9.4
 
 

@@ -5,7 +5,7 @@
 # https://github.com/ibbd/dockerfile-php-fpm
 #
 # 下载相关资源：./download.sh
-# sudo docker build -t ibbd/php ./
+# sudo docker build -t ibbd/php-fpm ./
 #
 
 # Pull base image.
@@ -47,7 +47,7 @@ COPY ext/composer.php /composer.php
 # composer中国镜像
 RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
-    && docker-php-ext-install iconv mcrypt pdo pdo_mysql tokenizer mbstring zip \
+    && docker-php-ext-install iconv mcrypt pdo pdo_mysql tokenizer mbstring zip mysqli \
     && pecl install redis \
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
     && pecl install memcache \
@@ -57,6 +57,8 @@ RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-d
     && rm /msgpack.tgz \
     && pecl install mongo \
     && echo "extension=mongo.so" > /usr/local/etc/php/conf.d/mongo.ini \
+    && pecl install imagick \
+    && echo "extension=imagick.so" > /usr/local/etc/php/conf.d/imagick.ini \
     && cd / \
     && php /composer.php \
     && mv composer.phar /usr/local/bin/composer \

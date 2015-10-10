@@ -22,6 +22,9 @@ WORKDIR /var/www
 # install phpDocumentor  (需要 Graphviz)
 # @see http://www.phpdoc.org/
 # @see http://www.phpdoc.org/docs/latest/index.html
+# phptrace安装之后会导致php用不了
+#&& pecl install trace \
+#&& echo "extension=trace.so" > /usr/local/etc/php/conf.d/trace.ini \
 COPY phpunit.phar /usr/local/bin/phpunit
 RUN apt-get update \
     && apt-get install -y \
@@ -41,8 +44,6 @@ RUN apt-get update \
     && pear install phpdoc/phpDocumentor \
     && pecl install --force --alldeps xdebug \
     && echo "zend_extension=xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini \
-    && pecl install trace \
-    && echo "extension=trace.so" > /usr/local/etc/php/conf.d/trace.ini \
     && pecl install xhprof-0.9.4 \
     && echo "extension=xhprof.so" > /usr/local/etc/php/conf.d/xhprof.ini \
     && chmod +x /usr/local/bin/phpunit \

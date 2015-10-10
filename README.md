@@ -22,6 +22,8 @@
 - mongo
 - msgpack 
 - zip
+- mysqli
+- imagick
 
 附加安装
 
