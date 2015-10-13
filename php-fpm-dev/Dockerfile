@@ -12,8 +12,6 @@ FROM ibbd/php-fpm
 
 MAINTAINER Alex Cai "cyy0523xc@gmail.com"
 
-WORKDIR /var/www
-
 # 安装公共测试工具及开发工具
 # 使用pecl install xdebug, 会有warning：Xdebug MUST be loaded as a Zend extension in Unknown on line 0
 # xdebug 必须使用 zend_extension_ts 或者 zend_extension 来标明它是zend的扩展
@@ -27,7 +25,7 @@ WORKDIR /var/www
 #&& echo "extension=trace.so" > /usr/local/etc/php/conf.d/trace.ini \
 COPY phpunit.phar /usr/local/bin/phpunit
 RUN apt-get update \
-    && apt-get install -y \
+    && apt-get install -y --no-install-recommends \
         man \
         git-core \
         vim-tiny \
@@ -47,14 +45,15 @@ RUN apt-get update \
     && pecl install xhprof-0.9.4 \
     && echo "extension=xhprof.so" > /usr/local/etc/php/conf.d/xhprof.ini \
     && chmod +x /usr/local/bin/phpunit \
+    && pecl clear-cache \
+    && apt-get autoremove \
+    && apt-get clean \
     && rm -r /var/lib/apt/lists/*
 
-# install phpstrace 
-# @see https://github.com/Qihoo360/phptrace
-
-# install phpdbg
 
 # 终端设置
 # 执行php-fpm时，默认值是dumb，这时在终端操作时可能会出现：terminal is not fully functional
-ENV TERM xterm
+#ENV TERM xterm
+
+WORKDIR /var/www
 
