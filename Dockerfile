@@ -56,11 +56,6 @@ RUN \
 # 原因：由于安装imagick扩展时需要依赖ImageMagick的函数库，因此必须要先安装ImageMagick, 但是安装了却依然不行。官网上有人评论需要安装libmagickwand-dev
 # 解决：apt-get install libmagickwand-dev 
 # 
-#&& cd / \
-#&& php /composer.php \
-#&& mv composer.phar /usr/local/bin/composer \
-#&& chmod 755 /usr/local/bin/composer \
-#&& rm /composer.php \
 RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
     && docker-php-ext-install iconv mcrypt pdo pdo_mysql tokenizer mbstring zip mysqli \
@@ -75,7 +70,10 @@ RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-d
     && pecl install imagick-beta \
     && echo "extension=imagick.so" > /usr/local/etc/php/conf.d/imagick.ini \
     && pecl clear-cache \
-    && curl -sS https://getcomposer.org/installer | php \
+    && curl -sS https://getcomposer.org/installer -o /composer.phar \
+    && mv /composer.phar /usr/local/bin/composer \
+    && chmod 755 /usr/local/bin/composer \
+    && rm /composer.phar \
     && composer config -g repositories.packagist composer http://packagist.phpcomposer.com 
 
 
