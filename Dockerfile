@@ -73,7 +73,6 @@ RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-d
     && curl -sS https://getcomposer.org/installer -o /composer.phar \
     && mv /composer.phar /usr/local/bin/composer \
     && chmod 755 /usr/local/bin/composer \
-    && rm /composer.phar \
     && composer config -g repositories.packagist composer http://packagist.phpcomposer.com 
 
 
