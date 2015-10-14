@@ -70,8 +70,11 @@ RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-d
     && pecl install imagick-beta \
     && echo "extension=imagick.so" > /usr/local/etc/php/conf.d/imagick.ini \
     && pecl clear-cache \
-    && curl -sS https://getcomposer.org/installer -o /composer.phar \
-    && mv /composer.phar /usr/local/bin/composer \
+    && cd / \
+    && curl -sS https://getcomposer.org/installer -o /composer.php \
+    && php composer.php \
+    && mv composer.phar /usr/local/bin/composer \
+    && rm -f composer.php \
     && chmod 755 /usr/local/bin/composer \
     && composer config -g repositories.packagist composer http://packagist.phpcomposer.com 
 
