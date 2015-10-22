@@ -1,8 +1,11 @@
-# PHP FPM Dockerfile
+# PHP FPM 镜像
 
-该镜像主要为满足 `laravel5` 框架而制作，并附加了 `redis`, `mongo`, `msgpack`, `swoole`等扩展。
+该镜像主要为满足 `laravel5.1` 框架而制作，并附加了 `redis`, `mongo`, `msgpack`, `imagick`等扩展。
 
-如果需要phpunit，xdebug，pman等测试及开发工具，请使用`ibbd/php-dev`镜像，对应的dockerfile在目录`php-dev`下。
+说明：
+
+- 如果需要phpunit，xdebug，pman等测试及开发工具，请使用`ibbd/php-fpm-dev`镜像，对应的dockerfile在目录`php-fpm-dev`下。
+- 如果只是使用php的命令行，可以使用对应的cli镜像（含swoole）：`ibbd/php-cli`和`ibbd-cli-dev`
 
 ## 基础说明
 
@@ -27,7 +30,7 @@
 
 附加安装
 
-- php composer
+- composer（使用国内镜像）
 
 ## 安装 
 
