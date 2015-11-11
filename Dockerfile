@@ -9,8 +9,7 @@
 #
 
 # Pull base image.
-#FROM php:5.6
-FROM php:5.6-fpm
+FROM php:5.6.15-fpm
 
 MAINTAINER Alex Cai "cyy0523xc@gmail.com"
 
@@ -93,5 +92,4 @@ VOLUME /var/www
 WORKDIR /var/www 
 
 EXPOSE 9000
-#CMD ["php-fpm"]
 
