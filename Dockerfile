@@ -52,6 +52,9 @@ RUN \
 # ERROR: `/tmp/pear/temp/imagick/configure --with-php-config=/usr/local/bin/php-config --with-imagick' failed
 # 原因：由于安装imagick扩展时需要依赖ImageMagick的函数库，因此必须要先安装ImageMagick, 但是安装了却依然不行。官网上有人评论需要安装libmagickwand-dev
 # 解决：apt-get install libmagickwand-dev 
+#
+# 注意：msgpack 2.0.0需要php7
+    #&& pecl install msgpack-beta \
 # 
 RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
@@ -60,7 +63,7 @@ RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-d
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
     && pecl install memcache \
     && echo "extension=memcache.so" > /usr/local/etc/php/conf.d/memcache.ini \
-    && pecl install msgpack-beta \
+    && pecl install channel://pecl.php.net/msgpack-0.5.7 \
     && echo "extension=msgpack.so" > /usr/local/etc/php/conf.d/msgpack.ini \
     && pecl install mongo \
     && echo "extension=mongo.so" > /usr/local/etc/php/conf.d/mongo.ini \
