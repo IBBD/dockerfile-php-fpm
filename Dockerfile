@@ -46,8 +46,6 @@ RUN \
 # 如果本地构建的话，建议先下载好相应的扩展包
 # 直接使用pecl install msgpack会报错：
 # Failed to download pecl/msgpack within preferred state "stable", latest release is version 0.5.7, stability "beta", use "channel://pecl.php.net/msgpack-0.5.7" to install
-# composer 
-# composer中国镜像
 #
 # install imagick 报错如下
 # checking ImageMagick MagickWand API configuration program... configure: error: not found. Please provide a path to MagickWand-config or Wand-config program.
@@ -68,7 +66,11 @@ RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-d
     && echo "extension=mongo.so" > /usr/local/etc/php/conf.d/mongo.ini \
     && pecl install imagick-beta \
     && echo "extension=imagick.so" > /usr/local/etc/php/conf.d/imagick.ini \
-    && pecl clear-cache \
+    && pecl clear-cache
+
+# composer 
+# composer中国镜像
+RUN \
     && cd / \
     && curl -sS https://getcomposer.org/installer -o /composer.php \
     && php composer.php \
