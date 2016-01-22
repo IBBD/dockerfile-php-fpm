@@ -1,6 +1,6 @@
-# PHP FPM 镜像
+# PHP FPM 镜像 For Laravel and Lumen
 
-最后更新时间：2015.11.11
+最后更新时间：2016.01.22
 
 该镜像主要为满足 `laravel5.1` 框架而制作，并附加了 `redis`, `mongo`, `msgpack`, `imagick`等扩展。
 
@@ -11,7 +11,7 @@
 
 ## 基础说明
 
-- 基础镜像：[php-fpm:5.6.15](https://hub.docker.com/_/php)
+- 基础镜像：[php-fpm:5.6.17](https://hub.docker.com/_/php)
 - 使用了阿里云的更新源，见 `./ext/sources.list`
 
 ## PHP扩展 
@@ -33,6 +33,8 @@
 附加安装
 
 - composer（使用国内镜像）
+- Laravel Installer: 文档https://laravel.com/docs/
+- Lumen Installer: 文档https://lumen.laravel.com/docs/
 
 ## 安装 
 

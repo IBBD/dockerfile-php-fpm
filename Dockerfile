@@ -9,7 +9,7 @@
 #
 
 # Pull base image.
-FROM php:5.6.15-fpm
+FROM php:5.6.17-fpm
 
 MAINTAINER Alex Cai "cyy0523xc@gmail.com"
 
@@ -75,6 +75,8 @@ RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-d
     && mv composer.phar /usr/local/bin/composer \
     && rm -f composer.php \
     && chmod 755 /usr/local/bin/composer \
+    && composer global require "laravel/installer" \
+    && composer global require "laravel/lumen-installer" \
     && composer config -g repositories.packagist composer http://packagist.phpcomposer.com 
 
 
@@ -92,4 +94,3 @@ VOLUME /var/www
 WORKDIR /var/www 
 
 EXPOSE 9000
-
