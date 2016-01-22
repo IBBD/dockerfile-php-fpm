@@ -16,7 +16,7 @@ MAINTAINER Alex Cai "cyy0523xc@gmail.com"
 # sources.list
 # git clone git@github.com:IBBD/docker-compose.git
 # 如果导致apt-get Install不成功，可以先注释这句
-ADD ext/sources.list   /etc/apt/sources.list
+#ADD ext/sources.list   /etc/apt/sources.list
 
 # Install modules
 # composer需要先安装zip
