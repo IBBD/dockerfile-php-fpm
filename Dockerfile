@@ -73,8 +73,7 @@ RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-d
 
 # composer 
 # composer中国镜像
-RUN \
-    && cd / \
+RUN cd / \
     && curl -sS https://getcomposer.org/installer -o /composer.php \
     && php composer.php \
     && mv composer.phar /usr/local/bin/composer \
