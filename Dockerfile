@@ -81,7 +81,9 @@ RUN cd / \
     && chmod 755 /usr/local/bin/composer \
     && composer global require "laravel/lumen-installer" \
     && composer global require "laravel/installer" \
-    && composer config -g repositories.packagist composer http://packagist.phpcomposer.com 
+    && composer config -g repositories.packagist composer http://packagist.phpcomposer.com  \
+    && composer clearcache \
+    && composer clear-cache
 
 
 # 解决时区问题
