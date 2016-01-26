@@ -79,8 +79,8 @@ RUN cd / \
     && mv composer.phar /usr/local/bin/composer \
     && rm -f composer.php \
     && chmod 755 /usr/local/bin/composer \
-    && composer global require "laravel/installer" \
     && composer global require "laravel/lumen-installer" \
+    && composer global require "laravel/installer" \
     && composer config -g repositories.packagist composer http://packagist.phpcomposer.com 
 
 
