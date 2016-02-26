@@ -74,6 +74,7 @@ RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-d
 # composer 
 # composer中国镜像
 # 注意：需要先安装lumen，在安装laravel，否则报错
+    #&& composer config -g repo.packagist composer http://packagist.phpcomposer.com \
 RUN cd / \
     && curl -sS https://getcomposer.org/installer -o /composer.php \
     && php composer.php \
@@ -82,7 +83,6 @@ RUN cd / \
     && chmod 755 /usr/local/bin/composer \
     && composer global require "laravel/lumen-installer" \
     && composer global require "laravel/installer" \
-    && composer config -g repositories.packagist composer http://packagist.phpcomposer.com  \
     && composer clearcache \
     && composer clear-cache
 
