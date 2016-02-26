@@ -1,18 +1,24 @@
 # PHP FPM 镜像 For Laravel and Lumen
 
-最后更新时间：2016.01.22
+## 更新记录
 
-该镜像主要为满足 `laravel5.1` 框架而制作，并附加了 `redis`, `mongo`, `msgpack`, `imagick`等扩展。
+2016.02.26
 
-说明：
+php版本更新到5.6.18
 
-- 如果需要phpunit，xdebug，pman等测试及开发工具，请使用`ibbd/php-fpm-dev`镜像，对应的dockerfile在目录`php-fpm-dev`下。
-- 如果只是使用php的命令行，可以使用对应的cli镜像（含swoole）：`ibbd/php-cli`和`ibbd-cli-dev`
+2016.01.22
+
+php版本更新到5.6.17
 
 ## 基础说明
 
-- 基础镜像：[php-fpm:5.6.17](https://hub.docker.com/_/php)
-- 使用了阿里云的更新源，见 `./ext/sources.list`
+该镜像主要为满足 `laravel5` 框架而制作，并附加了 `redis`, `mongo`, `msgpack`, `imagick`等扩展。
+
+说明：
+
+- 基础镜像：[php-fpm](https://hub.docker.com/_/php)
+- 如果需要phpunit，xdebug，pman等测试及开发工具，请使用`ibbd/php-fpm-dev`镜像，对应的dockerfile在目录`php-fpm-dev`下。
+- 如果只是使用php的命令行，可以使用对应的cli镜像（含swoole）：`ibbd/php-cli`和`ibbd-cli-dev`
 
 ## PHP扩展 
 
