@@ -4,6 +4,10 @@
 
 2016.02.26
 
+更改composer的安装方式，去掉packagist的国内镜像（可能用到国外服务器，而且也不稳定）
+
+2016.02.26
+
 php版本更新到5.6.18
 
 2016.01.22
@@ -38,7 +42,7 @@ php版本更新到5.6.17
 
 附加安装
 
-- composer（使用国内镜像）
+- composer（全局安装）
 - Laravel Installer: 文档https://laravel.com/docs/
 - Lumen Installer: 文档https://lumen.laravel.com/docs/
 

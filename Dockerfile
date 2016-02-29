@@ -74,13 +74,19 @@ RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-d
 # composer 
 # composer中国镜像
 # 注意：需要先安装lumen，在安装laravel，否则报错
+# 不应在镜像中绑定国内的镜像，因为镜像可能会用到国外的服务器
+# 测试国内的容易抽风。。
+    #&& curl -sS https://getcomposer.org/installer -o /composer.php \
+    #&& php composer.php \
+    #&& mv composer.phar /usr/local/bin/composer \
     #&& composer config -g repo.packagist composer http://packagist.phpcomposer.com \
+    #&& rm -f composer.php \
+    #&& chmod 755 /usr/local/bin/composer \
 RUN cd / \
-    && curl -sS https://getcomposer.org/installer -o /composer.php \
-    && php composer.php \
-    && mv composer.phar /usr/local/bin/composer \
-    && rm -f composer.php \
-    && chmod 755 /usr/local/bin/composer \
+    && php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php \
+    && php -r "if (hash('SHA384', file_get_contents('composer-setup.php')) === 'fd26ce67e3b237fffd5e5544b45b0d92c41a4afe3e3f778e942e43ce6be197b9cdc7c251dcde6e2a52297ea269370680') { echo 'Installer verified';  } else { echo 'Installer corrupt'; unlink('composer-setup.php');  }" \
+    && php composer-setup.php  --filename=composer  --install-dir=/usr/local/bin/ \
+    && rm composer-setup.php \
     && composer global require "laravel/lumen-installer" \
     && composer global require "laravel/installer" \
     && composer clearcache \
