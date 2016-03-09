@@ -9,7 +9,7 @@
 #
 
 # Pull base image.
-FROM php:5.6.18-fpm
+FROM php:5.6.19-fpm
 
 MAINTAINER Alex Cai "cyy0523xc@gmail.com"
 
@@ -55,10 +55,10 @@ RUN \
 #
 # 注意：msgpack 2.0.0需要php7
     #&& pecl install msgpack-beta \
-# 
+# 2016-03-09 增加mysql扩展
 RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
-    && docker-php-ext-install iconv mcrypt pdo pdo_mysql tokenizer mbstring zip mysqli \
+    && docker-php-ext-install iconv mcrypt pdo pdo_mysql tokenizer mbstring zip mysqli mysql \
     && pecl install redis \
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
     && pecl install memcache \
@@ -82,9 +82,9 @@ RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-d
     #&& composer config -g repo.packagist composer http://packagist.phpcomposer.com \
     #&& rm -f composer.php \
     #&& chmod 755 /usr/local/bin/composer \
+    #&& php -r "if (hash('SHA384', file_get_contents('composer-setup.php')) === 'fd26ce67e3b237fffd5e5544b45b0d92c41a4afe3e3f778e942e43ce6be197b9cdc7c251dcde6e2a52297ea269370680') { echo 'Installer verified';  } else { echo 'Installer corrupt'; unlink('composer-setup.php');  }" \
 RUN cd / \
     && php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php \
-    && php -r "if (hash('SHA384', file_get_contents('composer-setup.php')) === 'fd26ce67e3b237fffd5e5544b45b0d92c41a4afe3e3f778e942e43ce6be197b9cdc7c251dcde6e2a52297ea269370680') { echo 'Installer verified';  } else { echo 'Installer corrupt'; unlink('composer-setup.php');  }" \
     && php composer-setup.php  --filename=composer  --install-dir=/usr/local/bin/ \
     && rm composer-setup.php \
     && composer global require "laravel/lumen-installer" \
