@@ -44,6 +44,7 @@ php版本更新到5.6.17
 - zip
 - mysqli
 - imagick
+- mysql（2016-03-09 增加）
 
 附加安装
 
