@@ -9,7 +9,7 @@
 #
 
 # Pull base image.
-FROM php:5.6.19-fpm
+FROM php:5.6.21-fpm
 
 MAINTAINER Alex Cai "cyy0523xc@gmail.com"
 
