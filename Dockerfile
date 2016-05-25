@@ -1,10 +1,9 @@
 #
 # PHP Dockerfile
-# 满足laravel5.1版本的基本要求
+# 满足laravel5.2版本的基本要求
 #
 # https://github.com/ibbd/dockerfile-php-fpm
 #
-# 下载相关资源：./download.sh
 # sudo docker build -t ibbd/php-fpm ./
 #
 
@@ -13,30 +12,16 @@ FROM php:5.6.21-fpm
 
 MAINTAINER Alex Cai "cyy0523xc@gmail.com"
 
-# sources.list
-# git clone git@github.com:IBBD/docker-compose.git
-# 如果导致apt-get Install不成功，可以先注释这句
-#ADD ext/sources.list   /etc/apt/sources.list
-
 # Install modules
 # composer需要先安装zip
-# pecl install imagick时需要libmagickwand-dev。但是这个安装的东西有点多，python2.7也安装了
 RUN \
     apt-get update \
     && apt-get install -y --no-install-recommends \
         libmcrypt-dev \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libpng12-dev \
         libssl-dev \
-        libmagickwand-dev \
     && apt-get autoremove \
     && apt-get clean \
     && rm -r /var/lib/apt/lists/*
-
-
-#COPY ext/msgpack.tgz  /msgpack.tgz 
-#COPY ext/composer.php /composer.php
 
 # install php modules
 # pecl install php modules
@@ -46,32 +31,23 @@ RUN \
 # 如果本地构建的话，建议先下载好相应的扩展包
 # 直接使用pecl install msgpack会报错：
 # Failed to download pecl/msgpack within preferred state "stable", latest release is version 0.5.7, stability "beta", use "channel://pecl.php.net/msgpack-0.5.7" to install
-#
-# install imagick 报错如下
-# checking ImageMagick MagickWand API configuration program... configure: error: not found. Please provide a path to MagickWand-config or Wand-config program.
-# ERROR: `/tmp/pear/temp/imagick/configure --with-php-config=/usr/local/bin/php-config --with-imagick' failed
-# 原因：由于安装imagick扩展时需要依赖ImageMagick的函数库，因此必须要先安装ImageMagick, 但是安装了却依然不行。官网上有人评论需要安装libmagickwand-dev
-# 解决：apt-get install libmagickwand-dev 
-#
 # 注意：msgpack 2.0.0需要php7
     #&& pecl install msgpack-beta \
-# 2016-03-09 增加mysql扩展
+    #&& pecl install mongo \
+    #&& echo "extension=mongo.so" > /usr/local/etc/php/conf.d/mongo.ini \
+# 2016-05-25 基础镜像与扩展镜像分离
 # iconv tokenizer pdo mbstring: 已经包含在基础镜像里
-RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install gd \
-    && docker-php-ext-install mcrypt pdo_mysql zip mysqli mysql \
+# mysqli, mysql: 都转移到ibbd/php-fpm-ext镜像
+# gd库转移到ibbd/php-fpm-ext镜像
+# memcache, imagick, mysqli, mysql扩展转移到ibbd/php-fpm-ext库
+RUN \
+    docker-php-ext-install mcrypt pdo_mysql zip \
     && pecl install redis \
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
-    && pecl install memcache \
-    && echo "extension=memcache.so" > /usr/local/etc/php/conf.d/memcache.ini \
     && pecl install channel://pecl.php.net/msgpack-0.5.7 \
     && echo "extension=msgpack.so" > /usr/local/etc/php/conf.d/msgpack.ini \
-    && pecl install mongo \
-    && echo "extension=mongo.so" > /usr/local/etc/php/conf.d/mongo.ini \
     && pecl install mongodb \
     && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini \
-    && pecl install imagick-beta \
-    && echo "extension=imagick.so" > /usr/local/etc/php/conf.d/imagick.ini \
     && pecl clear-cache
 
 # composer 

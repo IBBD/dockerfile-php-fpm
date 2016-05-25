@@ -8,7 +8,7 @@
 #
 
 # Pull base image.
-FROM ibbd/php-fpm
+FROM ibbd/php-fpm-ext
 
 MAINTAINER Alex Cai "cyy0523xc@gmail.com"
 

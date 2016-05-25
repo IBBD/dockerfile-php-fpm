@@ -1,6 +1,17 @@
 # PHP FPM 镜像 For Laravel and Lumen
 
+## php5.6-fpm镜像体系
+
+- `php5.6-fpm`: 这是基础镜像
+- `ibbd/php-fpm`：用于生产环境。没有多余的插件，包括过时的插件（如mysql）和多余的插件（例如gd等）
+- `ibbd/php-fpm-ext`: 用于生产环境, 基于`ibbd/php-fpm`。包含一些项目可能需要用到的插件（例如mysql，gd等）
+- `ibbd/php-fpm-dev`: 用于测试环境及本地。在`ibbd/php-fpm-ext`的基础上包含一些测试工具等
+
 ## 更新记录
+
+2016.05.25
+
+镜像结构体系调整，把`ibbd/php-fpm`镜像分拆成了基础镜像`ibbd/php-fpm`和扩展镜像`ibbd/php-fpm-ext`
 
 2016.05.03
 
@@ -29,27 +40,22 @@ php版本更新到5.6.17
 
 ## 基础说明
 
-该镜像主要为满足 `laravel5` 框架而制作，并附加了 `redis`, `mongo`, `msgpack`, `imagick`等扩展。
+该镜像主要为满足 `laravel5` 框架而制作，并附加了 `redis`, `mongodb`, `msgpack`等扩展。
 
 说明：
 
 - 基础镜像：[php-fpm](https://hub.docker.com/_/php)
+- 如果需要扩展功能，请使用`ibbd/php-fpm-ext`
 - 如果需要phpunit，xdebug，pman等测试及开发工具，请使用`ibbd/php-fpm-dev`镜像，对应的dockerfile在目录`php-fpm-dev`下。
 - 如果只是使用php的命令行，可以使用对应的cli镜像（含swoole）：`ibbd/php-cli`和`ibbd-cli-dev`
 
 ## PHP扩展 
 
-iconv, pdo, tokenizer, mbstring: 已经包含在基础镜像里
-
-- gd
 - mcrypt
 - redis
-- mongo
+- mongodb
 - msgpack 
 - zip
-- mysqli
-- imagick
-- mysql（2016-03-09 增加, 有些旧代码居然还用这个！）
 
 附加安装
 
