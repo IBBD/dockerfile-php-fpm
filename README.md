@@ -39,20 +39,17 @@ php版本更新到5.6.17
 
 ## PHP扩展 
 
+iconv, pdo, tokenizer, mbstring: 已经包含在基础镜像里
+
 - gd
-- iconv 
 - mcrypt
-- pdo
-- tokenizer 
-- mbstring 
-- gd 
 - redis
 - mongo
 - msgpack 
 - zip
 - mysqli
 - imagick
-- mysql（2016-03-09 增加）
+- mysql（2016-03-09 增加, 有些旧代码居然还用这个！）
 
 附加安装
 

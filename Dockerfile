@@ -56,9 +56,10 @@ RUN \
 # 注意：msgpack 2.0.0需要php7
     #&& pecl install msgpack-beta \
 # 2016-03-09 增加mysql扩展
+# iconv tokenizer pdo mbstring: 已经包含在基础镜像里
 RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
-    && docker-php-ext-install iconv mcrypt pdo pdo_mysql tokenizer mbstring zip mysqli mysql \
+    && docker-php-ext-install mcrypt pdo_mysql zip mysqli mysql \
     && pecl install redis \
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
     && pecl install memcache \
