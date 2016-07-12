@@ -65,7 +65,7 @@ RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-d
     && docker-php-ext-install gd \
     && docker-php-ext-install  soap \
     && docker-php-ext-install iconv mcrypt pdo_mysql tokenizer mbstring zip mysqli mysql \
-    && pecl install redis \
+    && pecl install redis-2.2.8 \
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
     && pecl install memcache \
     && echo "extension=memcache.so" > /usr/local/etc/php/conf.d/memcache.ini \
