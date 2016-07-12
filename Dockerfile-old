@@ -63,6 +63,7 @@ RUN \
 # 2016-07-12 增加soap扩展
 RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd libxml soap \
+    && docker-php-ext-enable libxml soap \
     && docker-php-ext-install iconv mcrypt pdo_mysql tokenizer mbstring zip mysqli mysql \
     && pecl install redis \
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
