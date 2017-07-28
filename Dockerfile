@@ -7,7 +7,7 @@
 # sudo docker build -t ibbd/php-fpm ./
 #
 
-# Pull base image.
+# Pull  base image.
 FROM php:5.6.19-fpm
 
 MAINTAINER Alex Cai "cyy0523xc@gmail.com"
