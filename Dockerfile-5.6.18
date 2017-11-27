@@ -40,9 +40,10 @@ RUN \
 # mysqli, mysql: 都转移到ibbd/php-fpm-ext镜像
 # gd库转移到ibbd/php-fpm-ext镜像
 # memcache, imagick, mysqli, mysql扩展转移到ibbd/php-fpm-ext库
-RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install gd \
-    && docker-php-ext-install mcrypt mysqli mysql zip \
+#RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    #&& docker-php-ext-install gd \
+    #&& docker-php-ext-install mcrypt mysqli mysql zip \
+RUN docker-php-ext-install mcrypt mysqli mysql zip \
     && pecl install redis \
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
     && pecl install channel://pecl.php.net/msgpack-0.5.7 \
