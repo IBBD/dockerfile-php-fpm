@@ -51,9 +51,9 @@ RUN \
 RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
     && docker-php-ext-install mysqli mysql \
-    && pecl install memcache \
-    && echo "extension=memcache.so" > /usr/local/etc/php/conf.d/memcache.ini \
-    && pecl install imagick-beta \
+    #&& pecl install memcache \
+    #&& echo "extension=memcache.so" > /usr/local/etc/php/conf.d/memcache.ini \
+    && pecl install imagick \
     && echo "extension=imagick.so" > /usr/local/etc/php/conf.d/imagick.ini \
     && pecl clear-cache
 
