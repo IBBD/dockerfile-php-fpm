@@ -53,8 +53,8 @@ RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-d
     && docker-php-ext-install mysqli mysql \
     #&& pecl install memcache \
     #&& echo "extension=memcache.so" > /usr/local/etc/php/conf.d/memcache.ini \
-    && pecl install imagick \
-    && echo "extension=imagick.so" > /usr/local/etc/php/conf.d/imagick.ini \
+    #&& pecl install imagick \
+    #&& echo "extension=imagick.so" > /usr/local/etc/php/conf.d/imagick.ini \
     && pecl clear-cache
 
 # Define mountable directories.
